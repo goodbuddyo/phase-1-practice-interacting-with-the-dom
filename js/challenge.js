@@ -19,11 +19,10 @@ const init=() => {
   }
 
   let interval=setInterval(myTimer,1000);
-
   // add  button event listners
   minus.addEventListener('click',minusOneTimer);
   plus.addEventListener('click',plusOneTimer);
-  heart.addEventListener('click',likeTime);
+  heart.addEventListener('click',function() {likeTime(count);});
   pause.addEventListener('click',pauseTimer);
   resume.addEventListener('click',resumeTimer);
 
@@ -51,21 +50,50 @@ const init=() => {
     //console.log(time);
     return document.querySelector('#counter').textContent=time
   }
-  let likeCount=0;
-  function likeTime() {
-    likeCount+=1;
-    let li=document.createElement('li')
+  let likeCount=1;
+  function likeTime(count) {
+    let li=document.createElement('li');
+    likeCount=1;
     li.className='like'
     li.innerHTML=`
-      <span> ${likeCount} likes for ${count}</span>`
-
+      <span> ${likeCount} like for ${count}</span>`
     // add card to dom
     document.querySelector('ul.likes').appendChild(li)
   }
 
+  document.querySelector('#comment-form').addEventListener('submit',handleSubmit)
+
+  let zcomment
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    let commentObj={
+      zcomment: e.target.comment.value,
+    }
+    // grab form data update html comment div
+    //console.log(JSON.stringify(commentObj))
+    renderOneComment(commentObj)
+    //e.target.comment.value=''
+  }
+
+  function renderOneComment(commentObj) {
+    // Build commentObj card
+    let card=document.createElement('p')
+    card.className='card'
+    // innerHTML is coming from us so it should be safe, note backticks
+    card.innerHTML=`
+      <span class="z-comment">
+        ${commentObj.zcomment}
+      </span>`
+    document.querySelector('div#list').appendChild(card)
+    document.querySelector('input#comment-input').value=''
+
+
+
+
+  }
 
 }
-
 
 document.addEventListener("DOMContentLoaded",init);
 
