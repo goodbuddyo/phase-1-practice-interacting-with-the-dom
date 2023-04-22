@@ -14,7 +14,7 @@ const init=() => {
     count+=1;
     // display the current time
     let time=count.toString();
-    console.log(time);
+    //console.log(time);
     return document.querySelector('#counter').textContent=time
   }
 
@@ -23,7 +23,7 @@ const init=() => {
   // add  button event listners
   minus.addEventListener('click',minusOneTimer);
   plus.addEventListener('click',plusOneTimer);
-  heart.addEventListener('click',pauseTimer);
+  heart.addEventListener('click',likeTime);
   pause.addEventListener('click',pauseTimer);
   resume.addEventListener('click',resumeTimer);
 
@@ -41,15 +41,26 @@ const init=() => {
     count+=2;
     // display the current time
     let time=count.toString();
-    console.log(time);
+    //console.log(time);
     return document.querySelector('#counter').textContent=time
   }
   function minusOneTimer() {
     count-=1;
     // display the current time
     let time=count.toString();
-    console.log(time);
+    //console.log(time);
     return document.querySelector('#counter').textContent=time
+  }
+  let likeCount=0;
+  function likeTime() {
+    likeCount+=1;
+    let li=document.createElement('li')
+    li.className='like'
+    li.innerHTML=`
+      <span> ${likeCount} likes for ${count}</span>`
+
+    // add card to dom
+    document.querySelector('ul.likes').appendChild(li)
   }
 
 
