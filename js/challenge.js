@@ -37,7 +37,7 @@ const init=() => {
     interval=setInterval(myTimer,1000);
   }
   function plusOneTimer() {
-    count+=2;
+    count+=1;
     // display the current time
     let time=count.toString();
     //console.log(time);
@@ -79,18 +79,14 @@ const init=() => {
   function renderOneComment(commentObj) {
     // Build commentObj card
     let card=document.createElement('p')
-    card.className='card'
+    card.className='commentcard'
     // innerHTML is coming from us so it should be safe, note backticks
     card.innerHTML=`
       <span class="z-comment">
         ${commentObj.zcomment}
       </span>`
-    document.querySelector('div#list').appendChild(card)
+    document.querySelector('div#commentlist').appendChild(card)
     document.querySelector('input#comment-input').value=''
-
-
-
-
   }
 
 }
